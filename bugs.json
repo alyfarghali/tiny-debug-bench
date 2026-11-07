@@ -1,0 +1,58 @@
+[
+  {
+    "id": "01",
+    "file": "tiny/evaluator.py",
+    "description": "The division-by-zero check tests the left operand instead of the right one. Dividing by zero crashes with Python's ZeroDivisionError instead of a TinyError, and dividing zero by anything at run time wrongly reports 'division by zero' (e.g. 'let z = 0' then 'print z / 5'). A constant like 0 / 5 is still correct, because the optimizer folds it before the evaluator's check runs.",
+    "difficulty": "easy",
+    "category": "wrong operand"
+  },
+  {
+    "id": "02",
+    "file": "tiny/arithmetic.py",
+    "description": "Subtraction computes right - left instead of left - right, so every subtraction has the wrong sign (10 - 3 gives -7).",
+    "difficulty": "easy",
+    "category": "wrong operator"
+  },
+  {
+    "id": "03",
+    "file": "tiny/lexer.py",
+    "description": "'~' is missing from the lexer's set of operator characters, so any program using the average operator fails with \"unknown symbol '~'\".",
+    "difficulty": "easy",
+    "category": "missing token"
+  },
+  {
+    "id": "04",
+    "file": "tiny/arithmetic.py",
+    "description": "The average uses Python's floor division ((a + b) // 2) instead of truncating toward zero. Results are only wrong when a + b is negative and odd: (0 - 5) ~ 2 gives -2 instead of -1.",
+    "difficulty": "medium",
+    "category": "rounding"
+  },
+  {
+    "id": "05",
+    "file": "tiny/parser.py",
+    "description": "In parse_average, the right operand of '~' is parsed with parse_average instead of parse_product, which makes '~' right-associative: 8 ~ 4 ~ 0 parses as 8 ~ (4 ~ 0) = 5 instead of (8 ~ 4) ~ 0 = 3. Precedence relative to other operators is unchanged.",
+    "difficulty": "medium",
+    "category": "associativity"
+  },
+  {
+    "id": "06",
+    "file": "tiny/optimizer.py",
+    "description": "Constant folding no longer skips division by zero. A constant like 1 / 0 is folded during optimization, which crashes with Python's ZeroDivisionError inside arithmetic.py instead of the evaluator reporting 'Line N: division by zero'. The traceback points at arithmetic.py, but the bug is in the optimizer. Division by a variable that is zero is still reported correctly.",
+    "difficulty": "medium",
+    "category": "optimizer changes errors"
+  },
+  {
+    "id": "07",
+    "file": "tiny/lexer.py",
+    "description": "Keyword detection checks whether a word STARTS WITH a keyword instead of being exactly a keyword, so names like 'letter' and 'printer' are lexed as KW tokens. The lexer itself raises nothing; the failure shows up in the parser, e.g. 'let letter = 3' gives \"expected variable name after 'let'\".",
+    "difficulty": "hard",
+    "category": "cross-file (lexer -> parser)"
+  },
+  {
+    "id": "08",
+    "file": "tiny/parser.py",
+    "description": "The let statement stores the whole name token ('NAME', 'x') instead of just the name 'x'. Parsing succeeds; the failure shows up in the evaluator, which can never find the variable ('undefined variable' for a defined name) and prints the tuple in 'already defined' messages.",
+    "difficulty": "hard",
+    "category": "cross-file (parser -> evaluator)"
+  }
+]
