@@ -1,0 +1,16 @@
+let a = 2 * 2
+let b = a * a
+let c = b * b
+let d = c * c
+let e = d * d
+let f = e * e
+let g = f * e
+let two_to_100 = g * b
+print two_to_100
+
+print two_to_100 / 3
+print (0 - two_to_100) / 3
+print two_to_100 ~ (two_to_100 + 1)
+
+let just_past_float = 9007199254740993
+print just_past_float / 1

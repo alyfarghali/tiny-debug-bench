@@ -1,0 +1,10 @@
+let neg_seven = 0 - 7
+print 7 / 2
+print neg_seven / 2
+print 7 / (0 - 2)
+print neg_seven / (0 - 2)
+
+print 6 ~ 4
+print 5 ~ 2
+print (0 - 5) ~ 2
+print 8 ~ 4 ~ 0
