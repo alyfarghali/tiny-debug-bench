@@ -1,0 +1,5 @@
+# Model client: Google Gemini API (free tier)
+google-genai==3.0.0
+
+# Test runner for visible and hidden test suites
+pytest==9.2.0
